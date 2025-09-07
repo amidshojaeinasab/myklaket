@@ -1,7 +1,7 @@
 ﻿// src/components/MovieCard.jsx
 
 import React, { useState } from 'react';
-import { Card, Rate, Popconfirm, Button, Modal, Input } from 'antd';
+import { Card, Rate, Popconfirm, Modal, Input } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
@@ -34,50 +34,55 @@ const MovieCard = ({ movie, onDelete, onUpdate }) => {
       <Card
         hoverable
         style={{
-          width: 220, // ۱. عرض کارت کمی بیشتر شد
+          width: 220,
           margin: '16px',
           backgroundColor: '#2a2a2a',
           borderColor: '#444',
           overflow: 'hidden',
         }}
-        // ۲. حداقل ارتفاع برداشته شد و پدینگ تنظیم شد
-        bodyStyle={{ padding: '16px 16px 12px 16px' }} 
-        // ۳. ارتفاع پوستر متناسب با عرض جدید تنظیم شد
-        cover={<img alt={title} src={posterUrl} style={{ height: 330, objectFit: 'cover' }} />} 
+        bodyStyle={{ padding: '16px 16px 12px 16px' }}
+        cover={<img alt={title} src={posterUrl} style={{ height: 330, objectFit: 'cover' }} />}
         actions={[
           <EditOutlined key="edit" onClick={showEditModal} />,
           <Popconfirm
+            key="delete"
             title="Delete this movie?"
             description="Are you sure you want to remove this movie?"
             onConfirm={() => onDelete(id, title)}
             okText="Yes, Remove"
             cancelText="No"
           >
-            <DeleteOutlined key="delete" />
-          </Popconfirm>
+            <DeleteOutlined />
+          </Popconfirm>,
         ]}
       >
         <Meta
           title={<span style={{ color: '#e6e6e6', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{`${title} (${year})`}</span>}
         />
         
+        {/* نمایش امتیاز TMDB با ۵ ستاره */}
         <div style={{ marginTop: '10px', textAlign: 'center' }}>
-          <Rate allowHalf disabled defaultValue={rating / 2} style={{ fontSize: 16 }} />
+          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: '12px', marginRight: '8px' }}>TMDB:</span>
+          <Rate allowHalf disabled value={rating / 2} style={{ fontSize: 16 }} />
           <span style={{ marginLeft: '8px', color: '#ffad33', fontWeight: 'bold' }}>{rating}</span>
         </div>
 
+        {/* نمایش امتیاز کاربر با ۵ ستاره */}
         <div style={{ marginTop: '15px', textAlign: 'center', borderTop: '1px solid #444', paddingTop: '10px' }}>
-          <h4 style={{ color: 'rgba(255,255,255,0.7)', margin: '0 0 5px 0', fontWeight: 'normal', fontSize: '14px' }}>My Review</h4>
-          <Rate value={userRating} disabled style={{ fontSize: 16 }} />
+          <h4 style={{ color: 'rgba(255,255,255,0.7)', margin: '0 0 5px 0', fontWeight: 'normal', fontSize: '14px' }}>My Rating</h4>
+          <Rate allowHalf disabled value={userRating / 2} style={{ fontSize: 16 }} />
+          {userRating > 0 && (
+            <span style={{ marginLeft: '8px', color: '#ffad33', fontWeight: 'bold' }}>{userRating}</span>
+          )}
           {userReview && (
             <p style={{ color: 'rgba(255,255,255,0.5)', margin: '5px 0 0 0', fontSize: '12px', fontStyle: 'italic' }}>
-              "{userReview.substring(0, 30)}{userReview.length > 30 ? '...' : ''}"
+              {`"${userReview.substring(0, 30)}${userReview.length > 30 ? '...' : ''}"`}
             </p>
           )}
         </div>
       </Card>
 
-      {/* مودال برای ویرایش */}
+      {/* مودال ویرایش با ۱۰ ستاره کوچک */}
       <Modal
         title={`Review for: ${title}`}
         open={isModalVisible}
@@ -86,13 +91,21 @@ const MovieCard = ({ movie, onDelete, onUpdate }) => {
         okText="Save"
         cancelText="Cancel"
       >
-        <h4>Your Rating</h4>
-        <Rate
-          value={editedRating}
-          onChange={setEditedRating}
-          style={{ marginBottom: '20px' }}
-        />
-        <h4>Your Review</h4>
+        <h4 style={{ color: 'rgba(255, 255, 255, 0.85)', marginTop: '0' }}>Your Rating (0-10)</h4>
+        <div>
+          <Rate
+            count={10} // استفاده از ۱۰ ستاره برای دقت کامل
+            allowHalf // فعال کردن نیم‌ستاره
+            value={editedRating} // مقدار مستقیم در مقیاس ۱۰
+            onChange={setEditedRating} // ذخیره مستقیم مقدار در مقیاس ۱۰
+            style={{ marginBottom: '20px', fontSize: 18 }} // ۱. ستاره‌ها کوچک‌تر شدند
+          />
+          <span style={{ fontSize: 20, fontWeight: 'bold', marginLeft: 16, color: '#ffad33' }}>
+            {editedRating}
+          </span>
+        </div>
+        
+        <h4 style={{ color: 'rgba(255, 255, 255, 0.85)', marginTop: '10px' }}>Your Review</h4>
         <TextArea
           rows={4}
           placeholder="What did you think about this movie?"
