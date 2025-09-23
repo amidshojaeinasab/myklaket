@@ -1,0 +1,23 @@
+﻿.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-background);
+  padding: 0 20px;
+  height: 64px;
+}
+
+.logo {
+  color: var(--primary-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.menu {
+  background: transparent;
+  border-bottom: none;
+}
+
+.search {
+  width: 250px;
+}

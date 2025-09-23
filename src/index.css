@@ -1,0 +1,49 @@
+:root {
+  --primary-color: #f0c040; /* زرد */
+  --background-color: #121212; /* پس‌زمینه دارک */
+  --text-color: #f5f5f5; /* متن روشن */
+  --card-background: #1e1e1e;
+  --header-background: #1b1b1b;
+  --button-text: #121212;
+  --input-background: #1e1e1e;
+  --input-text: #f5f5f5;
+}
+
+/* پس‌زمینه کل سایت */
+body, #root {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* کارت‌ها */
+.ant-card, .card {
+  background-color: var(--card-background);
+  color: var(--text-color);
+}
+
+/* هدر */
+header, .header {
+  background-color: var(--header-background);
+  color: var(--text-color);
+}
+
+/* ورودی‌ها */
+.ant-input, .ant-input-textarea {
+  background-color: var(--input-background);
+  color: var(--input-text);
+}
+
+/* دکمه‌ها */
+.ant-btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: var(--button-text);
+}
+
+.ant-btn-primary:hover {
+  background-color: #e6b93a;
+  border-color: #e6b93a;
+}

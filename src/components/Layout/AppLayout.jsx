@@ -1,21 +1,16 @@
 ﻿// src/components/Layout/AppLayout.jsx
 import React from 'react';
 import { Layout } from 'antd';
-import Header from './Header/Header';
-import './AppLayout.css';
+import HeaderBar from './Header';
+import styles from './AppLayout.module.css';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 export default function AppLayout({ children }) {
   return (
-    <Layout className="app-layout">
-      <Header />
-      <Content className="app-content">
-        {children}
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        MyKlaket © {new Date().getFullYear()}
-      </Footer>
+    <Layout className={styles.layout}>
+      <HeaderBar />
+      <Content className={styles.content}>{children}</Content>
     </Layout>
   );
 }

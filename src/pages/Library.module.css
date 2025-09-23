@@ -1,0 +1,14 @@
+﻿.page {
+  padding: 20px;
+  background: var(--background-color);
+  min-height: 100vh;
+}
+
+.title {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.empty {
+  color: var(--text-color);
+}

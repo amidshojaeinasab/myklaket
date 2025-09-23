@@ -1,0 +1,12 @@
+﻿.card {
+  width: 100%;
+  background: var(--card-background);
+  color: var(--text-color);
+}
+
+.textarea {
+  width: 100%;
+  margin-top: 10px;
+  background: var(--input-background);
+  color: var(--input-text);
+}

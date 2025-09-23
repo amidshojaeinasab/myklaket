@@ -1,0 +1,24 @@
+﻿/* src/pages/Search.module.css */
+.page {
+  padding: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.query {
+  color: var(--primary);
+}
+
+.noImage {
+  width: 100%;
+  height: 300px;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 14px;
+}

@@ -1,0 +1,21 @@
+﻿.page {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.stat {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.chartContainer {
+  margin-top: 30px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
